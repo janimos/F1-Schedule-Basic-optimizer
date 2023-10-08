@@ -1,4 +1,5 @@
 ﻿using System;
+using TestData;
 
 namespace F1_Schedule
 {
@@ -7,6 +8,9 @@ namespace F1_Schedule
         static void Main(string[] args)
         {
             Console.WriteLine("F1 Scedule optimization");
+
+            Test x = new Test();
+            x.TestProgram();
         }
     }
 }
