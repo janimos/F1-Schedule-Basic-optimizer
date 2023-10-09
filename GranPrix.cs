@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GranPrix
 {
-    public class Stage: ICloneable
+    public class Stage : ICloneable
     {
         public string Name { get; set; }
         public string Location { get; set; }
@@ -18,15 +18,17 @@ namespace GranPrix
             StageIncome = income;
             Visited = false;
         }
-        public object Clone(){
+        public object Clone()
+        {
             return MemberwiseClone();
         }
     }
 
-    public class GranPrixSchedule: ICloneable
+    public class GranPrixSchedule : ICloneable
     {
         public int NumberOfGranPrix { get; set; }
         public Stage[] Schedule { get; set; }
+        public List<int> GranPrixWeek { get; set; }
         public float Income { get; set; }
         public float Cost { get; set; }
         float Profit { get; set; }
@@ -38,6 +40,7 @@ namespace GranPrix
             Income = 0;
             Cost = 0;
             Profit = 0;
+            GranPrixWeek = new List<int>();
         }
 
         void CalculateProfit()
@@ -51,7 +54,8 @@ namespace GranPrix
             return Profit;
         }
 
-        public object Clone(){
+        public object Clone()
+        {
             var schedule = (GranPrixSchedule)MemberwiseClone();
             return schedule;
         }
