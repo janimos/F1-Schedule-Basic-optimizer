@@ -67,13 +67,13 @@ namespace ThresholdAlgorithm
             return schedule;
         }
 
-        public GranPrixSchedule Optimize(StageList stageList, float threshold)
+        public GranPrixSchedule Optimize(StageList stageList, int threshold)
         {
             // Initialize the best schedule.
             GranPrixSchedule bestSchedule = GenerateInitialSolution();
             count = bestSchedule.NumberOfGranPrix;
 
-            int iterations = (int)Math.Pow(count, 3);
+            int iterations = (int)Math.Pow(count, threshold);
             int best = -1;
             bool toBreak = false;
             for (int i = 0; i < iterations; i++)
