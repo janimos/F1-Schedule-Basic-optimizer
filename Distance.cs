@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using GranPrix;
 
 namespace Distance
 {
     public class StageList
     {
-        private Dictionary<Stage, List<Tuple<Stage, float>>> adjacencyList;
+        public Dictionary<Stage, List<Tuple<Stage, float>>> adjacencyList;
 
         public StageList()
         {
@@ -30,6 +31,17 @@ namespace Distance
         public List<Tuple<Stage, float>> GetDistancesForStage(Stage stage)
         {
             return adjacencyList[stage];
+        }
+        public int StageListCount(){
+            return adjacencyList.Count;
+        }
+
+        public List<Stage> GetListOfStages(){
+            return adjacencyList.Keys.ToList();
+        }
+
+        public float GetDistanceToStage(Stage start, Stage end){
+            return adjacencyList[start].Where(x => x.Item1.Equals(end)).ToList().Select(x => x.Item2).FirstOrDefault();
         }
     }
 }

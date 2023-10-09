@@ -3,27 +3,7 @@ using System.Collections.Generic;
 
 namespace GranPrix
 {
-
-    public class Schedule
-    {
-        public int NumberGranPrix { get; set; }
-        public float Income { get; set; }
-        public float Cost { get; set; }
-
-        float Profit { get; set; }
-
-        void CalculateProfit()
-        {
-            Profit = Income - Cost;
-        }
-
-        public float GetProfit()
-        {
-            CalculateProfit();
-            return Profit;
-        }
-    }
-    public class Stage
+    public class Stage: ICloneable
     {
         public string Name { get; set; }
         public string Location { get; set; }
@@ -38,6 +18,42 @@ namespace GranPrix
             StageIncome = income;
             Visited = false;
         }
+        public object Clone(){
+            return MemberwiseClone();
+        }
     }
 
+    public class GranPrixSchedule: ICloneable
+    {
+        public int NumberOfGranPrix { get; set; }
+        public Stage[] Schedule { get; set; }
+        public float Income { get; set; }
+        public float Cost { get; set; }
+        float Profit { get; set; }
+
+        public GranPrixSchedule(int granPrixCount)
+        {
+            NumberOfGranPrix = granPrixCount;
+            Schedule = new Stage[NumberOfGranPrix];
+            Income = 0;
+            Cost = 0;
+            Profit = 0;
+        }
+
+        void CalculateProfit()
+        {
+            Profit = Income - Cost;
+        }
+
+        public float GetProfit()
+        {
+            CalculateProfit();
+            return Profit;
+        }
+
+        public object Clone(){
+            var schedule = (GranPrixSchedule)MemberwiseClone();
+            return schedule;
+        }
+    }
 }

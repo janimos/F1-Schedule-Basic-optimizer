@@ -2,6 +2,7 @@ using System;
 using GranPrix;
 using Distance;
 using System.Collections.Generic;
+using ThresholdAlgorithm;
 
 namespace TestData
 {
@@ -29,15 +30,22 @@ namespace TestData
             stages.AddDistance(secondStage, thirdStage, 900);
 
             var adjacent = stages.GetDistancesForStage(firstStage);
-            foreach (var st in adjacent){
+            /*foreach (var st in adjacent){
                 Console.WriteLine("{0}, {1}, {2}", st.Item1.Name, st.Item1.Visited.ToString(), st.Item2);
             }
-            firstStage.Visited = true;
             Console.WriteLine("");
             adjacent = stages.GetDistancesForStage(secondStage);
             foreach (var st in adjacent){
                 Console.WriteLine("{0}, {1}, {2}", st.Item1.Name, st.Item1.Visited.ToString(), st.Item2);
+            }*/
+
+            Threshold alg = new Threshold(stages);
+            var sch = alg.Optimize(stages, 1.0f);
+
+            foreach(var st in sch.Schedule){
+                Console.WriteLine("{0}, {1}, {2}", st.Name, st.Visited.ToString(), st.Location);
             }
+            Console.WriteLine("Costs: {0}", sch.Cost);
         }
 
     }
